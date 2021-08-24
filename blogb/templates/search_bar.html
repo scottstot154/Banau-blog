@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+		{% if searched %}
+			{% csrf_token %}
+			<center>
+			<h1>You searched for {{ searched }}'s posts</h1></center>
+			<br/>
+			{% for user in users %}
+				<li><h2>User: {{ user.author }}<br/></h2>
+					<img src="{{ user.image.url }}"><br/>
+					<h3><a href="{% url 'article-detail' user.pk %}">Description: {{ user.description }}</h3></a>
+					<br/>
+					<br/>
+				</li>
+			{% endfor %}
+
+		{% else%}
+			<h1>Hey! You forgot to search for an user</h1>
+		{% endif %}
+
+{% else %}
+	<h1>You need to be Logged in to view posts</h1>
+{% endif %}
+{% endblock %}

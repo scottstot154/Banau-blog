@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}{{ post.author }}
+{% endblock %}
+
+{% block content %}
+</br>
+{% if post.image %}
+<img src="{{ post.image.url }}">
+{% endif %}
+</br></br>
+{{ post.description }}
+
+
+<br/><br/>
+<a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+
+{% endblock %}

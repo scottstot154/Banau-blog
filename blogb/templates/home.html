@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+	<h1>Posts</h1>
+	{% if object_list == null %}
+		<h3>You have 0 Posts.</h3>
+		<li>
+            <a href="{% url 'add_post' %}">Click here to make your first</a>
+        </li>
+		
+	{% else %}
+
+        <ul>
+			{% for post in object_list %}
+				{% if post.author == user %}
+					<li>
+					<img src="{{ post.image.url }}"><br/>
+					<a href="{% url 'article-detail' post.pk %}">{{ post.description }}<br/>
+					</li>
+				{% endif %}
+			{% endfor %}	
+		</ul>
+	{% endif %}
+{% else %}
+	<h1>Welcome to my blog</h1>
+	<h3>Register or Log in to continue</h3>
+{% endif %}
+
+
+{% endblock %}
